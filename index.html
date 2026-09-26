@@ -1,0 +1,667 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>dark001pencil</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #07080c;
+            --panel: #0d1017;
+            --panel-hover: #11151e;
+            --border: #1c2330;
+            --text: #e8edf5;
+            --muted: #8993a4;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(139, 92, 246, 0.18);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background:
+                radial-gradient(circle at 50% -10%, rgba(139, 92, 246, 0.14), transparent 40%),
+                var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1050px, 90%);
+            margin: auto;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .logo {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 500;
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        .logo span {
+            color: var(--accent-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            transition: 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 620px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 90px 0;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            width: fit-content;
+            padding: 7px 13px;
+            border: 1px solid var(--border);
+            background: rgba(13,16,23,0.7);
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #4ade80;
+        }
+
+        h1 {
+            font-size: clamp(48px, 9vw, 90px);
+            line-height: 0.95;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: var(--accent-light);
+        }
+
+        .hero-description {
+            max-width: 650px;
+            font-size: 19px;
+            color: var(--muted);
+        }
+
+        .hero-description strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 11px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            color: var(--text);
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .button:hover {
+            border-color: var(--accent);
+            background: var(--panel-hover);
+            transform: translateY(-2px);
+        }
+
+        .button.primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .button.primary:hover {
+            background: #7c4fe0;
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            margin-bottom: 35px;
+        }
+
+        .section-label {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-light);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 32px;
+            letter-spacing: -1px;
+        }
+
+        /* ABOUT */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(13,16,23,0.8);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            transition: 0.25s ease;
+        }
+
+        .card:hover {
+            border-color: #2b3445;
+            transform: translateY(-3px);
+        }
+
+        .card p {
+            color: var(--muted);
+            margin-bottom: 15px;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .facts {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .fact-label {
+            color: #626d7e;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .fact-value {
+            margin-top: 3px;
+            font-size: 15px;
+        }
+
+        /* INTERESTS */
+
+        .interest-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .interest {
+            padding: 22px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .interest-icon {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .interest h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .interest p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* QUOTE */
+
+        .quote {
+            border-left: 2px solid var(--accent);
+            padding: 15px 25px;
+            margin-top: 25px;
+            background: linear-gradient(
+                90deg,
+                var(--accent-glow),
+                transparent
+            );
+        }
+
+        .quote p {
+            font-family: "JetBrains Mono", monospace;
+            color: #c6ccda;
+            font-size: 14px;
+        }
+
+        /* LINKS */
+
+        .links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .link-card {
+            display: block;
+            padding: 22px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: 0.2s ease;
+        }
+
+        .link-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+            transform: translateY(-3px);
+        }
+
+        .link-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .link-description {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .arrow {
+            float: right;
+            color: var(--accent-light);
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: #596273;
+            font-size: 13px;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mono {
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                min-height: 520px;
+                padding: 60px 0;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+
+            .about-grid,
+            .interest-grid,
+            .links {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            footer .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="container">
+        <div class="logo">
+            dark<span>001</span>pencil
+        </div>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#interests">Interests</a>
+            <a href="#links">Links</a>
+        </div>
+    </nav>
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <header class="hero container">
+
+            <div class="status">
+                <div class="status-dot"></div>
+                Somewhere on the internet
+            </div>
+
+            <h1>
+                I'm <span>dark001pencil.</span>
+            </h1>
+
+            <p class="hero-description">
+                I'm an 18-year-old who likes <strong>technology, programming,
+                cybersecurity, architecture</strong>, and probably spending
+                too much time on computers.
+            </p>
+
+            <div class="buttons">
+                <a href="#about" class="button primary">
+                    Get to know me
+                </a>
+
+                <a href="#links" class="button">
+                    Find me online
+                </a>
+            </div>
+
+        </header>
+
+
+        <!-- ABOUT -->
+
+        <section id="about">
+
+            <div class="container">
+
+                <div class="section-title">
+                    <div class="section-label">01 / about</div>
+                    <h2>A little about me.</h2>
+                </div>
+
+                <div class="about-grid">
+
+                    <div class="card">
+
+                        <p>
+                            I'm <strong>dark001pencil</strong>. This website is
+                            basically just a place for me to exist on the
+                            internet.
+                        </p>
+
+                        <p>
+                            Most of my interests revolve around computers.
+                            I like learning how things work, messing with
+                            technology, programming, and occasionally going
+                            way too far down a rabbit hole.
+                        </p>
+
+                        <p>
+                            I also have my own Discord bot and a domain that
+                            I use for various projects and self-hosted stuff.
+                        </p>
+
+                        <div class="quote">
+                            <p>
+                                "I have absolutely no idea what I'm doing."
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card facts">
+
+                        <div>
+                            <div class="fact-label">Name</div>
+                            <div class="fact-value">dark001pencil</div>
+                        </div>
+
+                        <div>
+                            <div class="fact-label">Age</div>
+                            <div class="fact-value">18</div>
+                        </div>
+
+                        <div>
+                            <div class="fact-label">Currently doing</div>
+                            <div class="fact-value">
+                                Learning & building things
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="fact-label">Main operating system</div>
+                            <div class="fact-value">Whatever I'm messing with</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INTERESTS -->
+
+        <section id="interests">
+
+            <div class="container">
+
+                <div class="section-title">
+                    <div class="section-label">02 / interests</div>
+                    <h2>Things I like.</h2>
+                </div>
+
+                <div class="interest-grid">
+
+                    <div class="interest">
+                        <div class="interest-icon">💻</div>
+                        <h3>Technology</h3>
+                        <p>
+                            Computers, servers, hardware, software,
+                            and generally figuring out how things work.
+                        </p>
+                    </div>
+
+                    <div class="interest">
+                        <div class="interest-icon">🔐</div>
+                        <h3>Cybersecurity</h3>
+                        <p>
+                            Learning about security, networks, systems,
+                            vulnerabilities, and how everything connects.
+                        </p>
+                    </div>
+
+                    <div class="interest">
+                        <div class="interest-icon">⌨️</div>
+                        <h3>Programming</h3>
+                        <p>
+                            Writing code, building random projects,
+                            and making things that probably didn't need
+                            to exist.
+                        </p>
+                    </div>
+
+                    <div class="interest">
+                        <div class="interest-icon">🎮</div>
+                        <h3>Roblox</h3>
+                        <p>
+                            I play a lot of Roblox. That's pretty much
+                            the entire explanation.
+                        </p>
+                    </div>
+
+                    <div class="interest">
+                        <div class="interest-icon">🎵</div>
+                        <h3>Music</h3>
+                        <p>
+                            I like music. I couldn't really tell you
+                            what genre. If it sounds good, I like it.
+                        </p>
+                    </div>
+
+                    <div class="interest">
+                        <div class="interest-icon">🌐</div>
+                        <h3>Self-hosting</h3>
+                        <p>
+                            Domains, services, servers, remote access,
+                            and generally putting things on the internet.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LINKS -->
+
+        <section id="links">
+
+            <div class="container">
+
+                <div class="section-title">
+                    <div class="section-label">03 / elsewhere</div>
+                    <h2>Find me online.</h2>
+                </div>
+
+                <div class="links">
+
+                    <!-- Replace the # with your actual links -->
+
+                    <a href="#" class="link-card">
+                        <span class="arrow">↗</span>
+                        <div class="link-name">Discord</div>
+                        <div class="link-description">
+                            Come say hi.
+                        </div>
+                    </a>
+
+                    <a href="#" class="link-card">
+                        <span class="arrow">↗</span>
+                        <div class="link-name">Roblox</div>
+                        <div class="link-description">
+                            Probably playing something.
+                        </div>
+                    </a>
+
+                    <a href="#" class="link-card">
+                        <span class="arrow">↗</span>
+                        <div class="link-name">GitHub</div>
+                        <div class="link-description">
+                            Code and whatever else I'm building.
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="container">
+
+            <span>
+                © 2026 dark001pencil
+            </span>
+
+            <span class="mono">
+                built on the internet
+            </span>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
+```
